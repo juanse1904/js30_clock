@@ -4,37 +4,46 @@ body{
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
+    --board-height: 35vw;
 }
 .board{
-    height: 45vh;
-    width: 45vh;
+    height: var(--board-height);
+    width: var(--board-height);
     background-color: transparent;
     border-radius: 100%;
     border: 7px solid white;
+    position: relative;
 }
 .clock{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    position: relative;
+}
+.clock > h2{
+    color: rgb(58, 39, 232);
+    font-size: 2.3rem;
 }
 .hand_min, .hand_sec, .hand_hour, .hand_min_manual, .hand_hour_manual{
     height: 6px;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: calc(var(--board-height)/2);
+    left: calc(var(--board-height)/2);
     transform-origin: 0%;
 }
 .hand_min, .hand_min_manual{
-    width: 20vh;
+    width: calc(var(--board-height) * 0.35);
     background-color: aqua;
 }
 .hand_hour, .hand_hour_manual{
-    width: 15vh;
+    width: calc(var(--board-height) * 0.25);
     background-color: black;
 }
 .hand_sec{
-    width: 18vh;
+    width: calc(var(--board-height) * 0.30);;
     background-color: red;
 } 
+#user_time{
+    margin-top: 30px;
+    padding: 10px;
+}
