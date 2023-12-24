@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>JSGT clock</title>
+</head>
+<body>
+    <section class="clock">
+        <div class="board">
+            <div class="hand_min"></div>
+            <div class="hand_sec"></div>
+            <div class="hand_hour"></div>
+        </div>
+        <h3 id ="nowTime"></h3>
+    </section>
+    <section class="clock">
+        <div class="board">
+            <div class="hand_min_manual"></div>
+            <div class="hand_sec_manual"></div>
+            <div class="hand_hour_manual"></div>
+        </div>
+        <input type="time" name="user_time"  id="user_time">
+    </section>
+</body>
+<script>
+const transformMinutesAndSecondsToAngle = (val) =>{
+    return ((val/60)*360) - 90;
+};
+const transformHoursToAngle = (val) =>{
+    return ((val/12)*360) - 90;
+};
+const formatHours = (hours) => {
+    if(hours >= 12){
+        return hours - 12;
+    }
+        return hours;
+}
+const userInput = document.querySelector('#user_time');
+userInput.addEventListener('change', (e)=>{
+   const userHours = e.target.value.split(':');
+   const userHour = formatHours(+userHours[0]);
+   const userMinutes = +userHours[1];
+   const secondHand = document.querySelector('.hand_sec_manual');
+    const minuteHand = document.querySelector('.hand_min_manual');
+    const hourHand = document.querySelector('.hand_hour_manual');
+    const minutesInAngle = transformMinutesAndSecondsToAngle(userMinutes);
+    const hoursInAngle = transformHoursToAngle(userHour);
+    minuteHand.style.transform = `rotate(${minutesInAngle}deg)`;
+    hourHand.style.transform = `rotate(${hoursInAngle}deg)`;
+})
+    const getHour = () =>{
+        const secondHand = document.querySelector('.hand_sec');
+        const minuteHand = document.querySelector('.hand_min');
+        const hourHand = document.querySelector('.hand_hour');
+        const digitalTime = document.querySelector('#nowTime');
+        const date = new Date();
+        const seconds = date.getSeconds();
+        const minutes = date.getMinutes();
+        const hours = formatHours(date.getHours());
+
+        const minutesInAngle = transformMinutesAndSecondsToAngle(minutes);
+        const secondsInAngle = transformMinutesAndSecondsToAngle(seconds);
+        const hoursInAngle = transformHoursToAngle(hours);
+        digitalTime.textContent = `${hours}:${minutes}:${seconds}`;
+        secondHand.style.transform = `rotate(${secondsInAngle}deg)`;
+        minuteHand.style.transform = `rotate(${minutesInAngle}deg)`;
+        hourHand.style.transform = `rotate(${hoursInAngle}deg)`;
+    }
+    setInterval(getHour,1000);
+</script>
+</html>

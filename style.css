@@ -1,0 +1,40 @@
+body{
+    min-height: 100vh;
+    background: linear-gradient(353deg, rgba(36,87,2,1) 0%, rgba(9,121,15,1) 55%, rgba(136,255,0,1) 100%);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
+.board{
+    height: 45vh;
+    width: 45vh;
+    background-color: transparent;
+    border-radius: 100%;
+    border: 7px solid white;
+}
+.clock{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.hand_min, .hand_sec, .hand_hour, .hand_min_manual, .hand_hour_manual{
+    height: 6px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform-origin: 0%;
+}
+.hand_min, .hand_min_manual{
+    width: 20vh;
+    background-color: aqua;
+}
+.hand_hour, .hand_hour_manual{
+    width: 15vh;
+    background-color: black;
+}
+.hand_sec{
+    width: 18vh;
+    background-color: red;
+} 
